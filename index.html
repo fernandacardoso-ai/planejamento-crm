@@ -232,6 +232,28 @@
   .tl-short{background:#FDEEE8;color:var(--accent)}
   .tl-medio{background:var(--teal2);color:var(--teal)}
   .tl-longo{background:var(--purple2);color:var(--purple)}
+
+  /* CRONO CARDS */
+  .crono-filter{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+  .cf-btn{font-size:12px;font-weight:600;padding:8px 16px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--ink2);cursor:pointer;transition:all .2s}
+  .cf-btn:hover{border-color:var(--ink3)}
+  .cf-btn.active.curto{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .cf-btn.active.medio{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .cf-btn.active.longo{background:var(--purple);color:#fff;border-color:var(--purple)}
+  .crono-month-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .crono-month-card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .crono-month-header{padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+  .crono-month-name{font-family:'DM Serif Display',serif;font-size:20px}
+  .crono-month-year{font-size:11px;color:var(--ink3)}
+  .crono-month-now{background:var(--now2);border-bottom:2px solid var(--now)}
+  .crono-month-now .crono-month-name{color:var(--now)}
+  .crono-initiative{padding:10px 18px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
+  .crono-initiative:first-of-type{border-top:1px solid var(--line)}
+  .ci-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+  .ci-content .ci-title{font-size:13px;font-weight:600;margin-bottom:2px}
+  .ci-content .ci-group{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+  .ci-content .ci-desc{font-size:12px;color:var(--ink3);line-height:1.4}
+  .crono-empty{padding:24px 18px;text-align:center;font-size:13px;color:var(--ink3)}
 </style>
 </head>
 <body>
@@ -614,7 +636,7 @@
           <li>Dashboard Power BI abastecido em tempo real — não quinzenal</li>
           <li>Métricas por cap: abertura, CTR, churn, receita por edição</li>
           <li>Substitui o registro manual de baseline — os dados estarão sempre vivos</li>
-          <li>A/B em 100% das campanhas novas</li>
+          <li>Pelo menos 2 campanhas por semana com teste A/B</li>
         </ul>
       </div>
     </div>
@@ -683,16 +705,15 @@
 <section id="cronograma">
   <div class="eyebrow">Cronograma reverso · Jun 2026 → Jun 2027</div>
   <h1>Mês a mês.</h1>
-  <p style="margin-bottom:8px">Parte dos objetivos finais e mapeia o que precisa acontecer a cada mês. A coluna destacada é o mês atual.</p>
-  <p style="font-size:13px;color:var(--now);margin-bottom:28px;font-weight:500">▶ Estamos em junho — foco total em integração, validação da base e primeiras reduções de tempo operacional.</p>
-  <div class="crono-legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#DCF0FA;border:1px solid #A8D8EF"></div>Agora / em andamento</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#FDEEE8;border:1px solid #F0C8B8"></div>Curto prazo (Jun–Set)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#D0EDE8;border:1px solid #9ED5CC"></div>Médio prazo (Out–Jan)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#EDE5F5;border:1px solid #C8AEED"></div>Longo prazo (Fev–Jun/27)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#F1EFE8;border:1px solid #D3D1C7"></div>Contínuo / ongoing</div>
+  <p style="margin-bottom:24px">Parte dos objetivos finais e mapeia o que precisa acontecer a cada mês. Filtre por fase para focar no que importa agora.</p>
+
+  <div class="crono-filter">
+    <button class="cf-btn active" onclick="filterCrono('curto',this)">⚡ Curto prazo · Jun–Set</button>
+    <button class="cf-btn" onclick="filterCrono('medio',this)">🌱 Médio prazo · Out–Jan</button>
+    <button class="cf-btn" onclick="filterCrono('longo',this)">🚀 Longo prazo · Fev–Jun/27</button>
   </div>
-  <div id="crono-container"></div>
+
+  <div id="crono-cards"></div>
 </section>
 
 <!-- ══════════ TRACKER ══════════ -->
@@ -726,69 +747,160 @@ function openTab(id,el){
   el.classList.add('active');
 }
 
-// ── CRONOGRAMA ──
-const MONTHS=['Jun','Jul','Ago','Set','Out','Nov','Dez','Jan','Fev','Mar','Abr','Mai'];
-const NOW_COL=0;
-const sections=[
-  {id:'integracao',label:'Integração & dados',color:'csh-integracao',rows:[
-    {title:'Envio da base histórica',desc:'Toda a base compradora de toda a vida sendo enviada para a Insider. Pré-requisito absoluto para segmentação e análise.',bars:[{s:0,len:3,cls:'bar-now',txt:'Base → Insider'}]},
-    {title:'Validação do streaming',desc:'Confirmar integridade dos dados: sem duplicatas, sem gaps, eventos históricos corretos por cap.',bars:[{s:0,len:4,cls:'bar-now',txt:'Validação contínua'}]},
-    {title:'Dados complementares (time técnico)',desc:'Solicitar ao time técnico: origem do cliente, faixa de valor, uso de saldo, forma de pagamento — dados que ainda não chegam.',bars:[{s:1,len:3,cls:'bar-short',txt:'Solicitar + receber'}]},
-    {title:'CDP — unificação de perfis',desc:'Configurar o CDP da Insider para unificar os perfis vindos de diferentes fontes em um único registro por cliente.',bars:[{s:3,len:2,cls:'bar-short',txt:'Configurar'}]},
-  ]},
-  {id:'governanca',label:'Governança & mensuração',color:'csh-governanca',rows:[
-    {title:'Reuniões quinzenais de batida de números',desc:'A cada 15 dias: CRM + time técnico + CSM Insider validam integridade dos dados e evolução do streaming. Vira mensal quando estável.',bars:[{s:0,len:4,cls:'bar-now',txt:'Quinzenal'},{s:4,len:8,cls:'bar-ongoing',txt:'Mensal'}]},
-    {title:'Dashboard Power BI em tempo real',desc:'Painel abastecido automaticamente com métricas por cap: abertura, CTR, churn, receita por edição. Substitui qualquer registro manual de baseline — os dados ficam sempre vivos.',bars:[{s:0,len:2,cls:'bar-short',txt:'Estruturar'},{s:2,len:10,cls:'bar-ongoing',txt:'Tempo real — sempre ativo'}]},
-  ]},
-  {id:'automacao',label:'Automação & jornadas',color:'csh-automacao',rows:[
-    {title:'Banco de copys mensais (web push)',desc:'Gerar todas as variações de texto do mês em bloco com apoio de IA. Transforma criação semanal em curadoria mensal.',bars:[{s:0,len:2,cls:'bar-short',txt:'Estruturar'},{s:2,len:10,cls:'bar-ongoing',txt:'Mensal'}]},
-    {title:'Templates base por canal e cap',desc:'Templates salvos na Insider para cada tipo de disparo — duplicar e editar em vez de montar do zero toda semana.',bars:[{s:1,len:2,cls:'bar-short',txt:'Criar templates'},{s:3,len:9,cls:'bar-ongoing',txt:'Manter'}]},
-    {title:'RSS para e-mails de premiação (teste)',desc:'E-mails que puxam conteúdo automaticamente do site. Em andamento com time técnico — ainda em fase de teste.',bars:[{s:0,len:3,cls:'bar-now',txt:'Teste'},{s:3,len:9,cls:'bar-amber',txt:'Escalar se aprovado'}]},
-    {title:'Onboarding ✓ ativa (3 caps)',desc:'Jornada já existe e roda nas 3 caps. Revisar fluxo, melhorar conteúdo com dados da base histórica.',bars:[{s:0,len:1,cls:'bar-now',txt:'Revisar'},{s:1,len:11,cls:'bar-amber',txt:'Ativa + otimizações contínuas'}]},
-    {title:'Abandono de compra ✓ ativa (3 caps)',desc:'Jornada já existe. Testar novas mensagens e ajustar timing com dados comportamentais da base histórica.',bars:[{s:0,len:1,cls:'bar-now',txt:'Revisar'},{s:1,len:11,cls:'bar-amber',txt:'Ativa + otimizações contínuas'}]},
-    {title:'Estímulo ao cadastro ✓ ativa (3 caps)',desc:'Jornada já existe. Enriquecer com dados de origem do cliente assim que disponíveis.',bars:[{s:0,len:1,cls:'bar-now',txt:'Revisar'},{s:1,len:11,cls:'bar-amber',txt:'Ativa + otimizações contínuas'}]},
-    {title:'Jornada: Recompra (próxima edição)',desc:'Comunicar clientes que já compraram para incentivá-los na edição seguinte, baseado no histórico de compras.',bars:[{s:1,len:2,cls:'bar-short',txt:'Criar'},{s:3,len:9,cls:'bar-amber',txt:'Ativa'}]},
-    {title:'Jornada: Pós-compra + NPS',desc:'Sequência após confirmação: engajamento e coleta de NPS para medir satisfação e identificar promotores.',bars:[{s:2,len:2,cls:'bar-short',txt:'Criar'},{s:4,len:8,cls:'bar-amber',txt:'Ativa'}]},
-    {title:'Jornada: Reengajamento de inativos',desc:'Sequência para clientes sem compra em 60–90 dias. Testar incentivos: desconto, conteúdo, lembrete de sorteio.',bars:[{s:4,len:2,cls:'bar-medio',txt:'Criar'},{s:6,len:6,cls:'bar-amber',txt:'Ativa'}]},
-    {title:'Jornadas de Upsell & Cross-sell',desc:'Comunicações baseadas na faixa de valor comprada (R$5/10/15/20) para incentivar aumento de ticket.',bars:[{s:5,len:2,cls:'bar-medio',txt:'Criar'},{s:7,len:5,cls:'bar-amber',txt:'Ativa'}]},
-  ]},
-  {id:'segmentacao',label:'Segmentação & inteligência',color:'csh-segmentacao',rows:[
-    {title:'Segmentação RFM',desc:'Modelo de Recência, Frequência e Valor ativo por cap: campeões, em risco, inativos e novos com comunicações específicas.',bars:[{s:4,len:2,cls:'bar-medio',txt:'Configurar'},{s:6,len:6,cls:'bar-medio',txt:'Otimizar mensalmente'}]},
-    {title:'Preditivo de churn',desc:'Modelo da Insider que identifica clientes com risco de parar de comprar — permite ações preventivas antes da perda.',bars:[{s:5,len:2,cls:'bar-medio',txt:'Ativar + validar'},{s:7,len:5,cls:'bar-longo',txt:'Monitorar'}]},
-    {title:'Personalização por canal preferido',desc:'Enviar cada comunicação pelo canal em que o cliente mais engaja — e-mail, push, in-app — por cap.',bars:[{s:6,len:2,cls:'bar-medio',txt:'Testar'},{s:8,len:4,cls:'bar-longo',txt:'Escalar'}]},
-  ]},
-  {id:'expansao',label:'Expansão de canais & parcerias',color:'csh-expansao',rows:[
-    {title:'WhatsApp — último recurso em jornadas',desc:'Não é canal de volume. Entra em jornadas apenas quando e-mail e push não converteram. POC já realizada — reavaliação com dados reais de jornada ativa. Menos disparos = menos custo.',bars:[{s:8,len:2,cls:'bar-longo',txt:'Estruturar lógica'},{s:10,len:2,cls:'bar-longo',txt:'Testar em jornada'}]},
-    {title:'Parceria CRM + Mídia (time interno)',desc:'Compartilhamento de base com time de mídia para audiências lookalike, exclusão de clientes em jornada ativa e retargeting coordenado. CRM e mídia falando a mesma língua.',bars:[{s:8,len:1,cls:'bar-longo',txt:'Alinhar'},{s:9,len:3,cls:'bar-longo',txt:'Estruturar + operar'}]},
-    {title:'Personalização onsite por segmento',desc:'Conteúdo diferente no site/app conforme segmento e cap — banner para inativos diferente de clientes VIP.',bars:[{s:8,len:3,cls:'bar-longo',txt:'Implementar'}]},
-    {title:'Programa de fidelidade',desc:'Estrutura de pontos ou benefícios integrada ao CRM para premiar frequência de compra e aumentar LTV.',bars:[{s:9,len:3,cls:'bar-longo',txt:'Estruturar + lançar'}]},
-    {title:'Planejamento CRM — Ano 2 (2027)',desc:'Com um ano completo de dados e baseline sólido, estruturar o próximo ciclo estratégico com metas mais ambiciosas.',bars:[{s:11,len:1,cls:'bar-longo',txt:'Planejar'}]},
-  ]},
-];
+// ── CRONOGRAMA CARDS ──
+const CRONO_DATA = {
+  curto: [
+    {
+      month:'Jun', year:'2026', now:true,
+      items:[
+        {group:'Integração',color:'#1A6699',title:'Envio da base histórica',desc:'Time técnico interno envia toda a base compradora para a Insider. Pré-requisito absoluto para tudo.'},
+        {group:'Integração',color:'#1A6699',title:'Validação do streaming',desc:'Confirmar integridade dos dados: sem duplicatas, sem gaps, eventos históricos corretos por cap.'},
+        {group:'Governança',color:'#D4820A',title:'Reuniões quinzenais de batida de números',desc:'CRM + time técnico + CSM Insider a cada 15 dias para validar dados e evolução do streaming.'},
+        {group:'Governança',color:'#D4820A',title:'Dashboard Power BI em tempo real',desc:'Iniciar estruturação com time técnico. Enquanto não sai, acompanhamento manual via dashboard Claude.'},
+        {group:'Automação',color:'#C8522A',title:'Banco de copys mensais (web push)',desc:'Gerar variações de texto do mês em bloco com IA. Criação semanal vira curadoria mensal.'},
+        {group:'Automação',color:'#C8522A',title:'Teste RSS para e-mails de premiação',desc:'E-mails puxando conteúdo automaticamente do site. Em andamento com time técnico.'},
+        {group:'Automação',color:'#C8522A',title:'Revisão: Onboarding ✓ ativa',desc:'Revisar fluxo e melhorar conteúdo com dados da base histórica (3 caps).'},
+        {group:'Automação',color:'#C8522A',title:'Revisão: Abandono de compra ✓ ativa',desc:'Testar novas mensagens e ajustar timing com dados comportamentais.'},
+        {group:'Automação',color:'#C8522A',title:'Revisão: Estímulo ao cadastro ✓ ativa',desc:'Enriquecer com dados de origem do cliente assim que disponíveis.'},
+        {group:'Automação',color:'#C8522A',title:'Calendário editorial por cap',desc:'Montar planejamento mensal de campanhas alinhado com marketing e produto.'},
+      ]
+    },
+    {
+      month:'Jul', year:'2026', now:false,
+      items:[
+        {group:'Integração',color:'#1A6699',title:'Dados complementares',desc:'Solicitar ao time técnico: origem, faixa de valor, uso de saldo, forma de pagamento.'},
+        {group:'Governança',color:'#D4820A',title:'Dashboard Power BI — entrega',desc:'Dashboard em tempo real no ar. Métricas por cap: abertura, CTR, churn, receita por edição.'},
+        {group:'Automação',color:'#C8522A',title:'Templates base por canal e cap',desc:'Templates salvos na Insider para cada tipo de disparo — duplicar e editar em vez de criar do zero.'},
+        {group:'Automação',color:'#C8522A',title:'Jornada: Recompra (próxima edição)',desc:'Comunicar clientes que já compraram para incentivá-los na edição seguinte.'},
+      ]
+    },
+    {
+      month:'Ago', year:'2026', now:false,
+      items:[
+        {group:'Integração',color:'#1A6699',title:'CDP — unificação de perfis',desc:'Configurar CDP da Insider para unificar perfis vindos de diferentes fontes por cliente.'},
+        {group:'Automação',color:'#C8522A',title:'Jornada: Pós-compra + NPS',desc:'Sequência após confirmação: engajamento e coleta de NPS para medir satisfação.'},
+        {group:'Automação',color:'#C8522A',title:'Pelo menos 2 campanhas por semana com teste A/B',desc:'Garantir testes em todas as novas comunicações a partir deste mês.'},
+      ]
+    },
+    {
+      month:'Set', year:'2026', now:false,
+      items:[
+        {group:'Governança',color:'#D4820A',title:'Reuniões quinzenais — avaliação',desc:'Avaliar se streaming está estável para migrar para frequência mensal.'},
+        {group:'Automação',color:'#C8522A',title:'Revisão geral das jornadas ativas',desc:'Otimizar as 9 jornadas com base nos dados do dashboard em tempo real.'},
+      ]
+    },
+  ],
+  medio: [
+    {
+      month:'Out', year:'2026', now:false,
+      items:[
+        {group:'Segmentação',color:'#2A7A6A',title:'Critério de desbloqueio',desc:'Confirmar streaming estável antes de avançar. Reuniões passam a ser mensais.'},
+        {group:'Segmentação',color:'#2A7A6A',title:'Segmentação RFM — configurar',desc:'Modelo de Recência, Frequência e Valor por cap: campeões, em risco, inativos, novos.'},
+        {group:'Automação',color:'#C8522A',title:'Jornada: Reengajamento de inativos',desc:'Sequência para clientes sem compra em 60–90 dias. Testar incentivos por cap.'},
+      ]
+    },
+    {
+      month:'Nov', year:'2026', now:false,
+      items:[
+        {group:'Segmentação',color:'#2A7A6A',title:'Comunicações por grupo RFM',desc:'Criar mensagens específicas para cada segmento: campeões, em risco, inativos, novos.'},
+        {group:'Automação',color:'#C8522A',title:'Jornadas de Upsell por faixa de valor',desc:'Comunicações baseadas na faixa comprada (R$5/10/15/20) para aumentar ticket.'},
+      ]
+    },
+    {
+      month:'Dez', year:'2026', now:false,
+      items:[
+        {group:'Segmentação',color:'#2A7A6A',title:'Preditivo de churn — ativar',desc:'Modelo da Insider que identifica clientes com risco de parar de comprar.'},
+        {group:'Segmentação',color:'#2A7A6A',title:'Alertas automáticos de risco',desc:'Notificações para clientes identificados pelo preditivo antes da perda.'},
+      ]
+    },
+    {
+      month:'Jan', year:'2027', now:false,
+      items:[
+        {group:'Segmentação',color:'#2A7A6A',title:'Personalização por canal preferido',desc:'Enviar cada comunicação pelo canal em que o cliente mais engaja por cap.'},
+        {group:'Governança',color:'#D4820A',title:'Revisão estratégica — semestre 1',desc:'Avaliar resultados, ajustar roadmap e apresentar evolução para a liderança.'},
+      ]
+    },
+  ],
+  longo: [
+    {
+      month:'Fev', year:'2027', now:false,
+      items:[
+        {group:'Expansão',color:'#5C3A8A',title:'Personalização onsite por segmento',desc:'Conteúdo diferente no site/app por segmento e cap — banner para inativos vs clientes VIP.'},
+        {group:'Expansão',color:'#5C3A8A',title:'Alinhamento CRM + Mídia',desc:'Primeiro papo com time de mídia sobre compartilhamento de base e audiências.'},
+      ]
+    },
+    {
+      month:'Mar', year:'2027', now:false,
+      items:[
+        {group:'Expansão',color:'#5C3A8A',title:'WhatsApp — último recurso em jornadas',desc:'Integrar à Insider como fallback: só dispara quando e-mail e push não converteram.'},
+        {group:'Expansão',color:'#5C3A8A',title:'Audiências lookalike de campeões',desc:'Criar audiências por cap para o time de mídia baseadas nos clientes de maior valor.'},
+      ]
+    },
+    {
+      month:'Abr', year:'2027', now:false,
+      items:[
+        {group:'Expansão',color:'#5C3A8A',title:'Exclusão de clientes em jornada ativa',desc:'Configurar exclusão nas campanhas de mídia para evitar sobreposição com CRM.'},
+        {group:'Expansão',color:'#5C3A8A',title:'Programa de fidelidade',desc:'Estrutura de pontos ou benefícios integrada ao CRM para premiar frequência.'},
+      ]
+    },
+    {
+      month:'Mai', year:'2027', now:false,
+      items:[
+        {group:'Expansão',color:'#5C3A8A',title:'100% das comunicações personalizadas',desc:'Meta de maturidade: nenhuma comunicação genérica — tudo por comportamento e canal.'},
+        {group:'Expansão',color:'#5C3A8A',title:'LTV CRM vs não-CRM',desc:'Medir e apresentar para a liderança o impacto real do CRM em receita.'},
+      ]
+    },
+    {
+      month:'Jun', year:'2027', now:false,
+      items:[
+        {group:'Governança',color:'#D4820A',title:'Planejamento CRM — Ano 2',desc:'Com um ano completo de dados, estruturar o próximo ciclo estratégico com metas mais ambiciosas.'},
+      ]
+    },
+  ]
+};
 
-function buildCrono(){
-  const cont=document.getElementById('crono-container');
-  let html=`<div class="crono-wrap"><table class="crono-table"><thead><tr><th>Iniciativa</th>`;
-  MONTHS.forEach((m,i)=>{html+=`<th class="${i===NOW_COL?'now-col':''}">${m}</th>`;});
-  html+=`</tr></thead><tbody>`;
-  sections.forEach(sec=>{
-    html+=`<tr><td colspan="13" style="padding:0"><div class="crono-section-header"><span class="csh-label ${sec.color}">${sec.label}</span></div></td></tr>`;
-    sec.rows.forEach(row=>{
-      html+=`<tr><td class="crono-cell-label"><div class="cl-title">${row.title}</div><div class="cl-desc">${row.desc}</div></td>`;
-      for(let m=0;m<12;m++){
-        let bar='';
-        row.bars.forEach(b=>{
-          if(b.s===m){const sc=b.len>1?`span${b.len}`:'';bar+=`<div class="crono-bar ${b.cls} ${sc}">${b.txt}</div>`;}
-        });
-        html+=`<td class="crono-cell-month${m===NOW_COL?' now-col':''}">${bar}</td>`;
-      }
-      html+=`</tr>`;
-    });
-  });
-  html+=`</tbody></table></div>`;
-  cont.innerHTML=html;
+let currentFase = 'curto';
+
+function filterCrono(fase, el) {
+  currentFase = fase;
+  document.querySelectorAll('.cf-btn').forEach(b => b.classList.remove('active','curto','medio','longo'));
+  el.classList.add('active', fase);
+  renderCronoCards();
 }
-buildCrono();
+
+function renderCronoCards() {
+  const data = CRONO_DATA[currentFase];
+  const col = currentFase === 'curto' ? '#C8522A' : currentFase === 'medio' ? '#2A7A6A' : '#5C3A8A';
+  let html = '<div class="crono-month-grid">';
+  data.forEach(month => {
+    html += `<div class="crono-month-card">
+      <div class="crono-month-header ${month.now ? 'crono-month-now' : ''}">
+        <div class="crono-month-name">${month.month}</div>
+        <div class="crono-month-year">${month.year}${month.now ? ' · <strong style="color:var(--now)">Agora</strong>' : ''}</div>
+      </div>`;
+    if (month.items.length === 0) {
+      html += `<div class="crono-empty">Sem iniciativas mapeadas</div>`;
+    } else {
+      month.items.forEach(item => {
+        html += `<div class="crono-initiative">
+          <div class="ci-dot" style="background:${item.color}"></div>
+          <div class="ci-content">
+            <div class="ci-group" style="color:${item.color}">${item.group}</div>
+            <div class="ci-title">${item.title}</div>
+            <div class="ci-desc">${item.desc}</div>
+          </div>
+        </div>`;
+      });
+    }
+    html += '</div>';
+  });
+  html += '</div>';
+  document.getElementById('crono-cards').innerHTML = html;
+}
+
+// Init with curto active
+document.querySelector('.cf-btn').classList.add('curto');
+renderCronoCards();
 
 // ── TRACKER ──
 const phases=[
