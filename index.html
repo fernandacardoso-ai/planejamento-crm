@@ -227,6 +227,18 @@
   .task-text.done{text-decoration:line-through;color:var(--ink3)}
   .phase-bar-wrap{height:4px;background:var(--line);border-radius:2px;margin-bottom:14px;overflow:hidden}
   .phase-bar-fill{height:100%;border-radius:2px;transition:width .3s}
+  .global-progress-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:20px}
+  .global-progress-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .global-progress-title{font-size:13px;font-weight:600;color:var(--ink)}
+  .global-progress-pct{font-family:'DM Serif Display',serif;font-size:32px;color:var(--accent);line-height:1}
+  .global-bar-wrap{height:12px;background:var(--line);border-radius:8px;overflow:hidden}
+  .global-bar-fill{height:100%;border-radius:8px;background:var(--accent);transition:width .4s}
+  .global-progress-sub{font-size:12px;color:var(--ink3);margin-top:8px}
+  .resp-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-left:6px}
+  .resp-crm{background:#FDEEE8;color:var(--accent)}
+  .resp-tech{background:var(--now2);color:var(--now)}
+  .resp-insider{background:var(--purple2);color:var(--purple)}
+  .resp-todos{background:var(--teal2);color:var(--teal)}
   .task-label{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
   .tl-now{background:var(--now2);color:var(--now)}
   .tl-short{background:#FDEEE8;color:var(--accent)}
@@ -273,12 +285,12 @@
 <!-- ══════════ NORTE ══════════ -->
 <section id="norte">
   <div class="eyebrow">CRM · Capitalização semanal · 3 caps</div>
-  <h1>Para onde estamos indo.</h1>
+  <h1>Para onde queremos ir.</h1>
 
   <div class="norte-wrap">
     <div class="norte-intro">
       <div class="ni-eyebrow">Norte estratégico</div>
-      <h2>CRM como motor de frequência, retenção e inteligência — nessa ordem.</h2>
+      <h2>Conhecer o cliente para fazer ele comprar toda semana.</h2>
       <p>Em capitalização semanal, toda semana é uma nova decisão de compra. O CRM existe para garantir que o cliente decida comprar de novo — e que a operação tenha dados confiáveis para saber quando, como e por quem isso acontece.</p>
     </div>
 
@@ -342,8 +354,8 @@
   <h1>A operação hoje.</h1>
 
   <div class="op-alert">
-    <div class="oa-title">Uma área, duas demandas — e uma oportunidade clara.</div>
-    <div class="oa-sub">O CRM das 3 caps opera hoje com um volume de execução semanal significativo, garantido por uma pessoa só. A estrutura atual sustenta a operação com qualidade — e o próximo passo natural é adicionar capacidade operacional para que a área possa evoluir para o estratégico.</div>
+    <div class="oa-title">A operação hoje — e o que ela exige.</div>
+    <div class="oa-sub">O CRM das 3 caps opera com mais de 137 disparos por semana, feitos por uma pessoa só. O volume garante a operação — mas deixa pouco espaço para estratégia.</div>
   </div>
 
   <h2>Volume semanal de execução</h2>
@@ -395,7 +407,7 @@
       <div class="op-gap-card">
         <div class="ogc-title">O que a área entrega hoje</div>
         <ul class="ogc-items">
-          <li>116+ disparos semanais com qualidade</li>
+          <li>137+ disparos semanais com qualidade</li>
           <li>9 jornadas ativas monitoradas</li>
           <li>Operação em 4 canais e 3 caps</li>
           <li>Resposta rápida a problemas operacionais</li>
@@ -417,7 +429,7 @@
 <!-- ══════════ INTRO ══════════ -->
 <section id="intro" class="active">
   <div class="eyebrow">Fundamentos · O que é CRM</div>
-  <h1>Relacionamento antes<br>de tecnologia.</h1>
+  <h1>A arte de se relacionar com o cliente certo, na hora certa.</h1>
 
   <div class="hero-intro">
     <div class="col">
@@ -578,7 +590,7 @@
   <h1>Curto, médio e longo prazo.</h1>
   <div class="unlock-alert">
     <div class="ua-icon">🔒</div>
-    <div><div class="ua-title">Lógica de desbloqueio</div><div class="ua-text">Cada fase depende da anterior estar sólida. O curto prazo gira em torno de validar a base histórica da base histórica e começar a reduzir o tempo operacional. Só com isso confirmado é que faz sentido avançar para segmentação e automações mais complexas.</div></div>
+    <div><div class="ua-title">Lógica de desbloqueio</div><div class="ua-text">Cada fase depende da anterior estar sólida. Sem os dados validados e o tempo operacional reduzido, não faz sentido avançar para segmentação e automações mais complexas.</div></div>
   </div>
   <div class="horizonte-tabs">
     <div class="htab curto active" onclick="openTab('curto',this)">⚡ Curto prazo · Jun–Set</div>
@@ -588,7 +600,7 @@
 
   <div class="horizonte-content active" id="tab-curto">
     <div class="h-header">
-      <div><h2>Fundação de dados, automação e jornadas</h2><p>Validar a base, documentar o ponto de partida, começar a reduzir o tempo operacional e evoluir as jornadas existentes.</p></div>
+      <div><h2>Fundação de dados, automação e jornadas</h2><p>Validar a base, começar a reduzir o tempo operacional e evoluir as jornadas existentes.</p></div>
       <span class="h-badge badge-curto">Jun → Set 2026</span>
     </div>
     <p style="font-size:12px;color:var(--ink3);background:var(--bg);border-radius:8px;padding:10px 14px;margin-bottom:16px">📌 <strong style="color:var(--ink2)">Sobre as metas abaixo:</strong> são referências de benchmark de mercado (fonte: estratégia CRM Tati / referências do setor). Serão calibradas com os dados reais assim que o dashboard estiver no ar.</p>
@@ -621,10 +633,8 @@
       </div>
       <div class="obj-card">
         <div class="obj-num">03</div>
-        <div class="obj-title">✉️ Evoluir jornadas existentes</div>
+        <div class="obj-title">✉️ Criar novas jornadas</div>
         <ul class="obj-items">
-          <li>Revisar e otimizar Onboarding (3 caps)</li>
-          <li>Revisar Abandono de Compra com novos dados</li>
           <li>Criar jornada de Recompra (próxima edição)</li>
           <li>Criar jornada de Pós-compra + NPS</li>
         </ul>
@@ -633,10 +643,9 @@
         <div class="obj-num">04</div>
         <div class="obj-title">📊 Dashboard em tempo real</div>
         <ul class="obj-items">
-          <li>Dashboard Power BI abastecido em tempo real — não quinzenal</li>
+          <li>Dashboard Power BI abastecido em tempo real</li>
           <li>Métricas por cap: abertura, CTR, churn, receita por edição</li>
           <li>Substitui o registro manual de baseline — os dados estarão sempre vivos</li>
-          <li>Pelo menos 2 campanhas por semana com teste A/B</li>
         </ul>
       </div>
     </div>
@@ -676,7 +685,7 @@
 
   <div class="horizonte-content" id="tab-longo">
     <div class="h-header">
-      <div><h2>Omnichannel, IA & maturidade</h2><p>CRM como receita previsível e camada de inteligência consolidada — cultura data-driven instalada nas 3 caps.</p></div>
+      <div><h2>De operação para inteligência</h2><p>Com a base sólida e as jornadas rodando, o foco é usar os dados para crescer — canais novos, parceria com mídia e CRM como parte do resultado do negócio.</p></div>
       <span class="h-badge badge-longo">Fev → Jun 2027</span>
     </div>
     <p style="font-size:12px;color:var(--ink3);background:var(--bg);border-radius:8px;padding:10px 14px;margin-bottom:16px">📌 <strong style="color:var(--ink2)">Sobre as metas abaixo:</strong> referências do planejamento estratégico inicial (benchmarks de mercado). Serão revisadas com dados reais ao longo do ano.</p>
@@ -720,14 +729,16 @@
 <section id="tracker">
   <div class="eyebrow">Tracker pessoal</div>
   <h1>Seu acompanhamento.</h1>
-  <div class="tracker-intro">
-    <div>
-      <p><strong>Marque as tarefas conforme avança.</strong> O progresso é salvo no navegador. As tarefas seguem a ordem lógica de desbloqueio — validar a base primeiro, depois evoluir.</p>
+  <p style="font-size:13px;color:var(--ink2);margin-bottom:16px">Marque as tarefas conforme avança. O progresso é salvo no navegador. As tags indicam o responsável por cada entrega.</p>
+  <div class="global-progress-wrap">
+    <div class="global-progress-top">
+      <div>
+        <div class="global-progress-title">Progresso geral do planejamento</div>
+        <div class="global-progress-sub" id="progress-sub">0 de 0 tarefas concluídas</div>
+      </div>
+      <div class="global-progress-pct" id="progress-pct">0%</div>
     </div>
-    <div class="progress-ring-wrap">
-      <div class="progress-num" id="progress-pct">0%</div>
-      <div class="progress-lbl">completo</div>
-    </div>
+    <div class="global-bar-wrap"><div class="global-bar-fill" id="global-bar" style="width:0%"></div></div>
   </div>
   <div id="tracker-phases"></div>
 </section>
@@ -905,43 +916,43 @@ renderCronoCards();
 // ── TRACKER ──
 const phases=[
   {id:'p0',title:'Agora · Jun–Set',badge:'tl-now',badgeTxt:'Agora',tasks:[
-    {id:'t00',text:'Alinhar com o time técnico interno cronograma de envio da base histórica para a Insider',lbl:'tl-now'},
-    {id:'t01',text:'Validar base recebida: sem duplicatas, sem missing, eventos históricos corretos',lbl:'tl-now'},
-    {id:'t02',text:'Agendar reunião quinzenal de batida de números (CRM + time técnico interno + Insider CSM)',lbl:'tl-now'},
-    {id:'t03',text:'Alinhar com BI a estrutura do dashboard Power BI em tempo real (métricas por cap)',lbl:'tl-now'},
-    {id:'t04',text:'Criar banco de copys mensal para web pushes com apoio de IA (variações por cap)',lbl:'tl-now'},
-    {id:'t05',text:'Criar templates base salvos na Insider por canal e cap (duplicar e editar)',lbl:'tl-now'},
-    {id:'t06',text:'Avançar teste de RSS com time técnico para e-mails de premiação',lbl:'tl-now'},
-    {id:'t07',text:'Revisar jornada de Onboarding com dados da base histórica (3 caps)',lbl:'tl-short'},
-    {id:'t08',text:'Revisar jornada de Abandono de Compra — testar novas mensagens e timing',lbl:'tl-short'},
-    {id:'t09',text:'Revisar Estímulo ao Cadastro com dados de origem quando disponíveis',lbl:'tl-short'},
-    {id:'t10',text:'Criar jornada de Recompra (próxima edição)',lbl:'tl-short'},
-    {id:'t11',text:'Criar jornada de Pós-compra + NPS',lbl:'tl-short'},
-    {id:'t13',text:'Garantir que dashboard Power BI está rodando em tempo real antes de avançar para segmentação',lbl:'tl-short'},
-    {id:'t14',text:'Solicitar dados faltantes ao time técnico (origem, faixa de valor, saldo, pagamento)',lbl:'tl-short'},
-    {id:'t15',text:'Apresentar este plano para a liderança e alinhar expectativas',lbl:'tl-short'},
+    {id:'t00',resp:'todos',text:'Alinhar com o time técnico interno cronograma de envio da base histórica para a Insider',lbl:'tl-now'},
+    {id:'t01',resp:'tech',text:'Validar base recebida: sem duplicatas, sem missing, eventos históricos corretos',lbl:'tl-now'},
+    {id:'t02',resp:'todos',text:'Agendar reunião quinzenal de batida de números (CRM + time técnico interno + Insider CSM)',lbl:'tl-now'},
+    {id:'t03',resp:'tech',text:'Alinhar com BI a estrutura do dashboard Power BI em tempo real (métricas por cap)',lbl:'tl-now'},
+    {id:'t04',resp:'crm',text:'Criar banco de copys mensal para web pushes com apoio de IA (variações por cap)',lbl:'tl-now'},
+    {id:'t05',resp:'crm',text:'Criar templates base salvos na Insider por canal e cap (duplicar e editar)',lbl:'tl-now'},
+    {id:'t06',resp:'tech',text:'Avançar teste de RSS com time técnico para e-mails de premiação',lbl:'tl-now'},
+    {id:'t07',resp:'crm',text:'Revisar jornada de Onboarding com dados da base histórica (3 caps)',lbl:'tl-short'},
+    {id:'t08',resp:'crm',text:'Revisar jornada de Abandono de Compra — testar novas mensagens e timing',lbl:'tl-short'},
+    {id:'t09',resp:'crm',text:'Revisar Estímulo ao Cadastro com dados de origem quando disponíveis',lbl:'tl-short'},
+    {id:'t10',resp:'crm',text:'Criar jornada de Recompra (próxima edição)',lbl:'tl-short'},
+    {id:'t11',resp:'crm',text:'Criar jornada de Pós-compra + NPS',lbl:'tl-short'},
+    {id:'t13',resp:'tech',text:'Garantir que dashboard Power BI está rodando em tempo real antes de avançar para segmentação',lbl:'tl-short'},
+    {id:'t14',resp:'crm',text:'Solicitar dados faltantes ao time técnico (origem, faixa de valor, saldo, pagamento)',lbl:'tl-short'},
+    {id:'t15',resp:'crm',text:'Apresentar este plano para a liderança e alinhar expectativas',lbl:'tl-short'},
   ]},
   {id:'p1',title:'Médio prazo · Out–Jan',badge:'tl-medio',badgeTxt:'Out → Jan',tasks:[
-    {id:'t16',text:'Confirmar streaming estável (critério de desbloqueio para esta fase)',lbl:'tl-medio'},
-    {id:'t17',text:'Migrar reuniões para periodicidade mensal com pauta fixa',lbl:'tl-medio'},
-    {id:'t18',text:'Configurar modelo RFM completo por cap (campeões, em risco, inativos, novos)',lbl:'tl-medio'},
-    {id:'t19',text:'Criar comunicações específicas para cada grupo RFM por cap',lbl:'tl-medio'},
-    {id:'t20',text:'Definir critério de inativo com dados reais e criar jornada de reengajamento',lbl:'tl-medio'},
-    {id:'t21',text:'Criar jornadas de Upsell por faixa de valor comprada (R$5/10/15/20)',lbl:'tl-medio'},
-    {id:'t22',text:'Ativar preditivo de churn da Insider com apoio do CSM',lbl:'tl-medio'},
-    {id:'t23',text:'Criar alertas automáticos para clientes em risco identificados pelo preditivo',lbl:'tl-medio'},
-    {id:'t24',text:'Testar personalização por canal preferido de cada cliente',lbl:'tl-medio'},
-    {id:'t25',text:'Fazer revisão estratégica do semestre 1 e ajustar roadmap',lbl:'tl-medio'},
+    {id:'t16',resp:'todos',text:'Confirmar streaming estável (critério de desbloqueio para esta fase)',lbl:'tl-medio'},
+    {id:'t17',resp:'todos',text:'Migrar reuniões para periodicidade mensal com pauta fixa',lbl:'tl-medio'},
+    {id:'t18',resp:'insider',text:'Configurar modelo RFM completo por cap (campeões, em risco, inativos, novos)',lbl:'tl-medio'},
+    {id:'t19',resp:'crm',text:'Criar comunicações específicas para cada grupo RFM por cap',lbl:'tl-medio'},
+    {id:'t20',resp:'crm',text:'Definir critério de inativo com dados reais e criar jornada de reengajamento',lbl:'tl-medio'},
+    {id:'t21',resp:'crm',text:'Criar jornadas de Upsell por faixa de valor comprada (R$5/10/15/20)',lbl:'tl-medio'},
+    {id:'t22',resp:'insider',text:'Ativar preditivo de churn da Insider com apoio do CSM',lbl:'tl-medio'},
+    {id:'t23',resp:'crm',text:'Criar alertas automáticos para clientes em risco identificados pelo preditivo',lbl:'tl-medio'},
+    {id:'t24',resp:'crm',text:'Testar personalização por canal preferido de cada cliente',lbl:'tl-medio'},
+    {id:'t25',resp:'todos',text:'Fazer revisão estratégica do semestre 1 e ajustar roadmap',lbl:'tl-medio'},
   ]},
   {id:'p2',title:'Longo prazo · Fev–Jun/27',badge:'tl-longo',badgeTxt:'Fev → Jun/27',tasks:[
-    {id:'t26',text:'Alinhar com time de mídia sobre compartilhamento de base e audiências (primeiro papo)',lbl:'tl-longo'},
-    {id:'t27',text:'Estruturar lógica de WhatsApp como último recurso em jornadas (só após e-mail e push não converterem)',lbl:'tl-longo'},
-    {id:'t28',text:'Criar audiências lookalike de clientes campeões por cap para o time de mídia',lbl:'tl-longo'},
-    {id:'t29',text:'Configurar exclusão de clientes em jornada ativa das campanhas de mídia (evitar sobreposição)',lbl:'tl-longo'},
-    {id:'t30',text:'Ativar personalização onsite por segmento nas 3 caps',lbl:'tl-longo'},
-    {id:'t31',text:'Estruturar e lançar programa de fidelidade integrado ao CRM',lbl:'tl-longo'},
-    {id:'t32',text:'Medir LTV CRM vs não-CRM e apresentar para a liderança',lbl:'tl-longo'},
-    {id:'t33',text:'Criar planejamento estratégico CRM 2027 com base no ano completo',lbl:'tl-longo'},
+    {id:'t26',resp:'tech',text:'Alinhar com time de mídia sobre compartilhamento de base e audiências (primeiro papo)',lbl:'tl-longo'},
+    {id:'t27',resp:'crm',text:'Estruturar lógica de WhatsApp como último recurso em jornadas (só após e-mail e push não converterem)',lbl:'tl-longo'},
+    {id:'t28',resp:'crm',text:'Criar audiências lookalike de clientes campeões por cap para o time de mídia',lbl:'tl-longo'},
+    {id:'t29',resp:'crm',text:'Configurar exclusão de clientes em jornada ativa das campanhas de mídia (evitar sobreposição)',lbl:'tl-longo'},
+    {id:'t30',resp:'crm',text:'Ativar personalização onsite por segmento nas 3 caps',lbl:'tl-longo'},
+    {id:'t31',resp:'crm',text:'Estruturar e lançar programa de fidelidade integrado ao CRM',lbl:'tl-longo'},
+    {id:'t32',resp:'crm',text:'Medir LTV CRM vs não-CRM e apresentar para a liderança',lbl:'tl-longo'},
+    {id:'t33',resp:'crm',text:'Criar planejamento estratégico CRM 2027 com base no ano completo',lbl:'tl-longo'},
   ]}
 ];
 
@@ -970,17 +981,20 @@ function renderTracker(){
         </div>
       </div>
       <div class="tracker-tasks">
-        <div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:${pct}%;background:${col}"></div></div>
         ${ph.tasks.map(t=>`
           <div class="task-item">
             <div class="task-check ${saved[t.id]?'checked':''}" onclick="toggleTask('${t.id}')"></div>
             <span class="task-text ${saved[t.id]?'done':''}">${t.text}</span>
             <span class="task-label ${t.lbl}">${t.lbl==='tl-now'?'Agora':t.lbl==='tl-short'?'Curto':t.lbl==='tl-medio'?'Médio':'Longo'}</span>
+            <span class="resp-tag resp-${t.resp||'crm'}">${t.resp==='tech'?'Time Técnico':t.resp==='insider'?'Insider':t.resp==='todos'?'Todos':'CRM'}</span>
           </div>`).join('')}
       </div>`;
     container.appendChild(div);
   });
-  document.getElementById('progress-pct').textContent=Math.round((done/total)*100)+'%';
+  const pctVal = Math.round((done/total)*100);
+  document.getElementById('progress-pct').textContent=pctVal+'%';
+  document.getElementById('global-bar').style.width=pctVal+'%';
+  document.getElementById('progress-sub').textContent=done+' de '+total+' tarefas concluídas';
 }
 function toggleTask(tid){
   const saved=JSON.parse(localStorage.getItem('crm_tracker3')||'{}');
