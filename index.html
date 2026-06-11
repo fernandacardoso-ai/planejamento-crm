@@ -240,6 +240,23 @@
   .resp-insider{background:var(--purple2);color:var(--purple)}
   .resp-todos{background:var(--teal2);color:var(--teal)}
   .task-label{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+  .task-note-wrap{padding:6px 0 4px 26px}
+  .task-note-btn{font-size:11px;color:var(--ink3);cursor:pointer;background:none;border:none;padding:0;display:flex;align-items:center;gap:4px}
+  .task-note-btn:hover{color:var(--accent)}
+  .task-note-input{width:100%;margin-top:6px;padding:8px 10px;font-size:12px;font-family:'DM Sans',sans-serif;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical;min-height:60px;outline:none}
+  .task-note-input:focus{border-color:var(--accent)}
+  .notes-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center}
+  .notes-modal.open{display:flex}
+  .notes-modal-inner{background:var(--card);border-radius:16px;padding:28px 32px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;position:relative}
+  .notes-modal-close{position:absolute;top:16px;right:20px;font-size:20px;cursor:pointer;color:var(--ink3);background:none;border:none}
+  .notes-modal-close:hover{color:var(--ink)}
+  .note-entry{padding:12px 0;border-bottom:1px solid var(--line)}
+  .note-entry:last-child{border-bottom:none}
+  .note-entry-task{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px}
+  .note-entry-phase{font-size:10px;color:var(--ink3);margin-bottom:6px}
+  .note-entry-text{font-size:13px;color:var(--ink2);line-height:1.5}
+  .notes-btn{font-size:12px;font-weight:600;color:var(--now);background:var(--now2);border:1px solid #A8D8EF;border-radius:20px;padding:6px 16px;cursor:pointer;margin-left:auto;display:block}
+  .notes-btn:hover{background:#C8E8F8}
   .tl-now{background:var(--now2);color:var(--now)}
   .tl-short{background:#FDEEE8;color:var(--accent)}
   .tl-medio{background:var(--teal2);color:var(--teal)}
@@ -532,18 +549,7 @@
       </div>
     </div>
 
-    <div style="background:var(--card);border:1px solid #E8E4DE;border-left:4px solid var(--purple);border-radius:0 12px 12px 0;padding:20px 24px">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
-        <div style="flex:1">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--purple2);color:var(--purple);padding:3px 10px;border-radius:20px">Baixo impacto imediato</span>
-            <span style="font-size:13px;font-weight:600">Parceria com mídia não avança</span>
-          </div>
-          <p style="font-size:13px;margin-bottom:8px"><strong>Risco:</strong> A integração CRM + mídia exige alinhamento de processos entre duas áreas com ritmos e prioridades distintos. Mesmo com boa vontade dos dois lados, a operacionalização pode levar tempo.</p>
-          <p style="font-size:13px;color:var(--teal)"><strong>Mitigação:</strong> Está prevista apenas no longo prazo — há tempo para construir o relacionamento. Começar com uma conversa informal antes de propor processo formal.</p>
-        </div>
-        <div style="text-align:right;flex-shrink:0"><div style="font-size:11px;color:var(--ink3)">Dependência</div><div style="font-size:13px;font-weight:600;color:var(--ink2)">Time de mídia</div></div>
-      </div>
+    
     </div>
 
   </div>
@@ -592,6 +598,25 @@
     <div class="ua-icon">🔒</div>
     <div><div class="ua-title">Lógica de desbloqueio</div><div class="ua-text">Cada fase depende da anterior estar sólida. Sem os dados validados e o tempo operacional reduzido, não faz sentido avançar para segmentação e automações mais complexas.</div></div>
   </div>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 28px;margin-bottom:24px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px">📊 Base atual na Insider · Jan–Jun 2026 · <span style="color:var(--accent)">dados pré-streaming completo</span></div>
+    <p style="font-size:12px;color:var(--ink3);margin-bottom:14px">Os números abaixo refletem apenas o que está hoje na Insider — antes do envio completo da base histórica pelo time técnico. As metas foram calibradas com base nesses dados.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div style="border:1px solid var(--line);border-radius:10px;padding:14px">
+        <div style="font-size:11px;font-weight:700;color:#b52020;margin-bottom:8px">Minas Cap</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.8">Base total: <strong>783.535</strong><br>Com compra: <strong>697.381</strong> (89%)<br>Compradores 2026: <strong>127.651</strong> (16%)<br>Inativos est.: <strong>~569.730</strong></div>
+      </div>
+      <div style="border:1px solid var(--line);border-radius:10px;padding:14px">
+        <div style="font-size:11px;font-weight:700;color:#c8a000;margin-bottom:8px">Super Minas</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.8">Base total: <strong>276.842</strong><br>Com compra: <strong>241.290</strong> (87%)<br>Compradores 2026: <strong>72.818</strong> (26%)<br>Inativos est.: <strong>~168.472</strong></div>
+      </div>
+      <div style="border:1px solid var(--line);border-radius:10px;padding:14px">
+        <div style="font-size:11px;font-weight:700;color:#1a5abf;margin-bottom:8px">Super Vale</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.8">Base total: <strong>171.038</strong><br>Com compra: <strong>126.075</strong> (74%)<br>Compradores 2026: <strong>50.451</strong> (29%)<br>Inativos est.: <strong>~75.624</strong></div>
+      </div>
+    </div>
+  </div>
+
   <div class="horizonte-tabs">
     <div class="htab curto active" onclick="openTab('curto',this)">⚡ Curto prazo · Jun–Set</div>
     <div class="htab medio" onclick="openTab('medio',this)">🌱 Médio prazo · Out–Jan</div>
@@ -607,8 +632,7 @@
     <div class="kpis-row">
       <div class="kpi-box"><div class="kv curto">100%</div><div class="kl">Base histórica validada na Insider</div></div>
       <div class="kpi-box"><div class="kv curto">−40%</div><div class="kl">Tempo operacional semanal (meta)</div></div>
-      <div class="kpi-box"><div class="kv curto">5+</div><div class="kl">Jornadas ativas por cap</div></div>
-      <div class="kpi-box"><div class="kv curto">>20%</div><div class="kl">Abertura de e-mail (benchmark)</div></div>
+      <div class="kpi-box"><div class="kv curto">>13%</div><div class="kl">Abertura de e-mail · bench Jan–Jun: MC 12,53% · SM 12,73% · SV 10,49%</div></div>
     </div>
     <div class="objectives-grid">
       <div class="obj-card">
@@ -644,8 +668,18 @@
         <div class="obj-title">📊 Dashboard em tempo real</div>
         <ul class="obj-items">
           <li>Dashboard Power BI abastecido em tempo real</li>
-          <li>Métricas por cap: abertura, CTR, churn, receita por edição</li>
+          <li>Métricas por cap: abertura, CTOR, churn, receita por edição</li>
           <li>Substitui o registro manual de baseline — os dados estarão sempre vivos</li>
+        </ul>
+      </div>
+      <div class="obj-card">
+        <div class="obj-num">05</div>
+        <div class="obj-title">📣 Parceria CRM + Mídia</div>
+        <ul class="obj-items">
+          <li>Alinhar com time de mídia sobre compartilhamento de base</li>
+          <li>Audiências lookalike de clientes campeões por cap</li>
+          <li>Exclusão de quem já está em jornada ativa (evitar sobreposição)</li>
+          <li>Retargeting coordenado: CRM e mídia falando a mesma língua</li>
         </ul>
       </div>
     </div>
@@ -664,10 +698,9 @@
     </div>
     <p style="font-size:12px;color:var(--ink3);background:var(--bg);border-radius:8px;padding:10px 14px;margin-bottom:16px">📌 <strong style="color:var(--ink2)">Sobre as metas abaixo:</strong> benchmarks de mercado para operações de CRM em produto de recorrência semanal. Revisão prevista após 1º semestre com dados reais do dashboard.</p>
     <div class="kpis-row">
-      <div class="kpi-box"><div class="kv medio">>25%</div><div class="kl">Abertura de e-mail</div></div>
-      <div class="kpi-box"><div class="kv medio">>8%</div><div class="kl">Reativação de inativos</div></div>
-      <div class="kpi-box"><div class="kv medio">−10%</div><div class="kl">Redução de churn</div></div>
-      <div class="kpi-box"><div class="kv medio">>3,5%</div><div class="kl">CTR médio</div></div>
+      <div class="kpi-box"><div class="kv medio">>15%</div><div class="kl">Abertura de e-mail · bench Jan–Jun: MC 12,53% · SM 12,73% · SV 10,49%</div></div>
+      <div class="kpi-box"><div class="kv medio">>1-2%</div><div class="kl">Reativação de inativos · base pré-streaming: ~813k inativos</div></div>
+      <div class="kpi-box"><div class="kv medio">>2%</div><div class="kl">CTOR · bench Jan–Jun: MC 1,72% · SM 1,60% · SV 1,90%</div></div>
     </div>
     <div class="objectives-grid">
       <div class="obj-card"><div class="obj-num">01</div><div class="obj-title">🔢 Segmentação RFM ativa</div><ul class="obj-items"><li>Configurar RFM completo na Insider por cap</li><li>Mapear segmentos: campeões, em risco, inativos</li><li>Criar comunicações específicas por grupo</li><li>Revisão mensal dos segmentos</li></ul></div>
@@ -690,15 +723,15 @@
     </div>
     <p style="font-size:12px;color:var(--ink3);background:var(--bg);border-radius:8px;padding:10px 14px;margin-bottom:16px">📌 <strong style="color:var(--ink2)">Sobre as metas abaixo:</strong> referências do planejamento estratégico inicial (benchmarks de mercado). Serão revisadas com dados reais ao longo do ano.</p>
     <div class="kpis-row">
-      <div class="kpi-box"><div class="kv longo">>18%</div><div class="kl">Receita atribuída ao CRM</div></div>
-      <div class="kpi-box"><div class="kv longo">+25%</div><div class="kl">Uplift de LTV</div></div>
+      <div class="kpi-box"><div class="kv longo">>6%</div><div class="kl">Receita atribuída ao CRM · bench Jan–Jun: MC 14,3% · SM 1,1% · SV 2,4% (média ~6%)</div></div>
+      <div class="kpi-box"><div class="kv longo">Baseline</div><div class="kl">Estabelecer baseline de LTV e definir meta para 2027</div></div>
       <div class="kpi-box"><div class="kv longo">5+</div><div class="kl">Canais integrados</div></div>
-      <div class="kpi-box"><div class="kv longo">+15pts</div><div class="kl">NPS da base ativa</div></div>
+      <div class="kpi-box"><div class="kv longo">NPS</div><div class="kl">Estabelecer baseline de NPS e definir meta para 2027</div></div>
     </div>
     <div class="objectives-grid">
       <div class="obj-card"><div class="obj-num">01</div><div class="obj-title">📱 WhatsApp como último recurso</div><ul class="obj-items"><li>Não é canal de volume — é canal de otimização</li><li>Entra em jornadas só quando e-mail e push não converteram</li><li>Menos disparos = menos custo + menor risco de fadiga</li><li>Avaliar desempenho vs POC anterior com dados reais</li></ul></div>
       <div class="obj-card"><div class="obj-num">02</div><div class="obj-title">🎯 Personalização avançada</div><ul class="obj-items"><li>100% das comunicações personalizadas por comportamento</li><li>Personalização onsite por segmento e cap</li><li>Timing inteligente baseado em dia preferido de compra</li></ul></div>
-      <div class="obj-card"><div class="obj-num">03</div><div class="obj-title">📣 Parceria CRM + Mídia (interno)</div><ul class="obj-items"><li>Alinhar com time de mídia sobre compartilhamento de base</li><li>Audiências lookalike de clientes campeões por cap</li><li>Exclusão de quem já está em jornada ativa (evitar sobreposição)</li><li>Retargeting coordenado: CRM e mídia falando a mesma língua</li></ul></div>
+      <div class="obj-card"><div class="obj-num">03</div><div class="obj-title">🎯 Personalização avançada</div><ul class="obj-items"><li>100% das comunicações personalizadas por comportamento</li><li>Personalização onsite por segmento e cap</li><li>Timing inteligente baseado em dia preferido de compra</li></ul></div>
       <div class="obj-card"><div class="obj-num">04</div><div class="obj-title">📊 CRM como cultura data-driven</div><ul class="obj-items"><li>Rituais mensais de análise por cap</li><li>Receita atribuída ao CRM: saber exatamente quanto cada jornada gerou por edição</li><li>Planejamento Ano 2 com baseline sólido</li></ul></div>
     </div>
     <div class="depends-block">
@@ -739,6 +772,17 @@
       <div class="global-progress-pct" id="progress-pct">0%</div>
     </div>
     <div class="global-bar-wrap"><div class="global-bar-fill" id="global-bar" style="width:0%"></div></div>
+    <div style="margin-top:14px;text-align:right"><button class="notes-btn" onclick="openNotesModal()">📋 Ver todas as notas</button></div>
+  </div>
+
+  <!-- Notes Modal -->
+  <div class="notes-modal" id="notes-modal">
+    <div class="notes-modal-inner">
+      <button class="notes-modal-close" onclick="closeNotesModal()">✕</button>
+      <h2 style="margin-bottom:4px;font-size:22px">Notas do planejamento</h2>
+      <p style="font-size:13px;color:var(--ink3);margin-bottom:20px">Anotações registradas por tarefa</p>
+      <div id="notes-modal-content"></div>
+    </div>
   </div>
   <div id="tracker-phases"></div>
 </section>
@@ -957,7 +1001,8 @@ const phases=[
 ];
 
 function renderTracker(){
-  const saved=JSON.parse(localStorage.getItem('crm_tracker3')||'{}');
+  const saved=JSON.parse(localStorage.getItem('crm_tracker3')||'{}')
+  const savedNotes=JSON.parse(localStorage.getItem('crm_notes')||'{}');
   const container=document.getElementById('tracker-phases');
   container.innerHTML='';
   let total=0,done=0;
@@ -982,11 +1027,18 @@ function renderTracker(){
       </div>
       <div class="tracker-tasks">
         ${ph.tasks.map(t=>`
-          <div class="task-item">
+          <div class="task-item" style="flex-wrap:wrap">
             <div class="task-check ${saved[t.id]?'checked':''}" onclick="toggleTask('${t.id}')"></div>
             <span class="task-text ${saved[t.id]?'done':''}">${t.text}</span>
             <span class="task-label ${t.lbl}">${t.lbl==='tl-now'?'Agora':t.lbl==='tl-short'?'Curto':t.lbl==='tl-medio'?'Médio':'Longo'}</span>
             <span class="resp-tag resp-${t.resp||'crm'}">${t.resp==='tech'?'Time Técnico':t.resp==='insider'?'Insider':t.resp==='todos'?'Todos':'CRM'}</span>
+          </div>
+          <div class="task-note-wrap">
+            <div style="display:flex;align-items:center;gap:12px">
+              <button class="task-note-btn" onclick="toggleNote('${t.id}')">✏️ ${savedNotes[t.id]?'editar nota':'adicionar nota'}</button>
+              <button class="task-note-btn" style="color:var(--now)" onclick="openSingleNote('${t.id}')">📋 ver notas</button>
+            </div>
+            <textarea class="task-note-input" id="note-${t.id}" style="display:${savedNotes[t.id]?'block':'none'}" placeholder="Escreva sua anotação aqui..." onblur="saveNote('${t.id}')">${savedNotes[t.id]||''}</textarea>
           </div>`).join('')}
       </div>`;
     container.appendChild(div);
@@ -1004,6 +1056,61 @@ function toggleTask(tid){
   renderTracker();
 }
 function togglePhase(pid){document.getElementById(pid).classList.toggle('open');}
+
+function toggleNote(tid){
+  const el=document.getElementById('note-'+tid);
+  if(el) el.style.display=el.style.display==='none'?'block':'none';
+}
+
+function saveNote(tid){
+  const el=document.getElementById('note-'+tid);
+  if(!el) return;
+  const notes=JSON.parse(localStorage.getItem('crm_notes')||'{}');
+  if(el.value.trim()) notes[tid]=el.value.trim();
+  else delete notes[tid];
+  localStorage.setItem('crm_notes',JSON.stringify(notes));
+  // update btn text
+  const btn=el.previousElementSibling;
+  if(btn) btn.innerHTML='✏️ '+(el.value.trim()?'ver nota':'adicionar nota');
+}
+
+function openNotesModal(){
+  const notes=JSON.parse(localStorage.getItem('crm_notes')||'{}');
+  const content=document.getElementById('notes-modal-content');
+  const allTasks=[];
+  phases.forEach(ph=>{ph.tasks.forEach(t=>allTasks.push({...t,phase:ph.title}));});
+  const withNotes=allTasks.filter(t=>notes[t.id]);
+  if(withNotes.length===0){
+    content.innerHTML='<p style="color:var(--ink3);font-size:13px;text-align:center;padding:24px 0">Nenhuma nota registrada ainda.</p>';
+  } else {
+    content.innerHTML=withNotes.map(t=>`
+      <div class="note-entry">
+        <div class="note-entry-phase">${t.phase}</div>
+        <div class="note-entry-task">${t.text}</div>
+        <div class="note-entry-text">${notes[t.id]}</div>
+      </div>`).join('');
+  }
+  document.getElementById('notes-modal').classList.add('open');
+}
+
+function openSingleNote(tid){
+  const notes=JSON.parse(localStorage.getItem('crm_notes')||'{}');
+  const content=document.getElementById('notes-modal-content');
+  const allTasks=[];
+  phases.forEach(ph=>{ph.tasks.forEach(t=>allTasks.push({...t,phase:ph.title}));});
+  const task=allTasks.find(t=>t.id===tid);
+  if(task && notes[tid]){
+    content.innerHTML=`<div class="note-entry"><div class="note-entry-phase">${task.phase}</div><div class="note-entry-task">${task.text}</div><div class="note-entry-text">${notes[tid]}</div></div>`;
+  } else {
+    content.innerHTML='<p style="color:var(--ink3);font-size:13px;text-align:center;padding:24px 0">Nenhuma nota registrada para esta tarefa.</p>';
+  }
+  document.getElementById('notes-modal').classList.add('open');
+}
+
+function closeNotesModal(){
+  document.getElementById('notes-modal').classList.remove('open');
+}
+
 renderTracker();
 </script>
 </body>
